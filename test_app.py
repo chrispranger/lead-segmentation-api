@@ -971,6 +971,12 @@ def get_result_segments(ids, complete_predictions, collections_predictions):
             }
         }
 
+    '''
+    result_dict =  {
+            "result": result_list
+            }
+    '''
+
     return result_dict
 
 

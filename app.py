@@ -91,13 +91,18 @@ def impute_missing_values(posted_data):
     except:
         MatchFlag_AffluenceIndex = MatchFlag_AffluenceIndex_impute
     try:
-        EconomicCohortsCodeNumeric = posted_data['EconomicCohortsCodeNumeric']
-        EconomicCohortsCodeNumeric = float(EconomicCohortsCodeNumeric)
+        # Get numeric from code
+        EconomicCohortsCodeNumeric = posted_data['EconomicCohorts']
+        emp_str = ""
+        for m in EconomicCohortsCodeNumeric:
+            if m.isdigit():
+                emp_str = emp_str + m
+        EconomicCohortsCodeNumeric = float(emp_str)
     except:
         EconomicCohortsCodeNumeric = EconomicCohortsCodeNumeric_impute
 
     try:
-        Total_Income360 = posted_data['Total_Income360']
+        Total_Income360 = posted_data['Income360']
         Total_Income360 = float(Total_Income360)
     except:
         Total_Income360 = Total_Income360_impute
@@ -144,7 +149,7 @@ def impute_missing_values(posted_data):
 
     # String Data
     try:
-        EconomicCohortsCode = posted_data['EconomicCohortsCode']
+        EconomicCohortsCode = posted_data['EconomicCohorts']
         if EconomicCohortsCode == None:
             EconomicCohortsCode = EconomicCohortsCode_impute
         else:
