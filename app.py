@@ -112,7 +112,7 @@ def impute_missing_values(posted_data):
     except:
         Vantage_Score_Neighborhood_Risk_Score = Vantage_Score_Neighborhood_Risk_Score_impute
     try:
-        total_liquid_assets = posted_data['total_liquid_assets']
+        total_liquid_assets = posted_data['Total_Liquid_Assets__c']
         total_liquid_assets = float(total_liquid_assets)
     except:
         total_liquid_assets = total_liquid_assets_impute
@@ -122,7 +122,7 @@ def impute_missing_values(posted_data):
     except:
         netWorthGoldMin__c = netWorthGoldMin__c_impute
     try:
-        ESI = posted_data['ESI']
+        ESI = posted_data['Economic_Stability_Indicator__c']
         ESI = float(ESI)
     except:
         ESI = ESI_impute
@@ -132,12 +132,12 @@ def impute_missing_values(posted_data):
     except:
         distance_to_center__c = distance_to_center__c_impute
     try:
-        created_hour = posted_data['created_hour']
+        created_hour = posted_data['Created_Hour__c']
         created_hour = float(created_hour)
     except:
         created_hour = created_hour_impute
     try:
-        created_dow = posted_data['created_dow']
+        created_dow = posted_data['Created_Day_Of_Week__c']
         created_dow = float(created_dow)
     except:
         created_dow = created_dow_impute
@@ -153,7 +153,7 @@ def impute_missing_values(posted_data):
         EconomicCohortsCode = EconomicCohortsCode_impute
 
     try:
-        first_campaign_type = posted_data['first_campaign_type']
+        first_campaign_type = posted_data['First_Campaign_Type__c']
         if first_campaign_type == None:
             first_campaign_type = first_campaign_type_impute
         else:
@@ -162,7 +162,7 @@ def impute_missing_values(posted_data):
         first_campaign_type = first_campaign_type_impute
 
     try:
-        CreatedBy_Channel = posted_data['CreatedBy_Channel']
+        CreatedBy_Channel = posted_data['Created_By_Channel__c']
         if CreatedBy_Channel == None:
             CreatedBy_Channel = CreatedBy_Channel_impute
         else:
@@ -171,7 +171,7 @@ def impute_missing_values(posted_data):
         CreatedBy_Channel = CreatedBy_Channel_impute
 
     try:
-        has_email_address = posted_data['has_email_address']
+        has_email_address = posted_data['Has_Email_Address__c']
         if has_email_address == None:
             has_email_address = has_email_address_impute
         else:
@@ -180,7 +180,7 @@ def impute_missing_values(posted_data):
         has_email_address = has_email_address_impute
 
     try:
-        dental_condition = posted_data['dental_condition']
+        dental_condition = posted_data['Dental_Condition__c']
         if dental_condition == None:
             dental_condition = dental_condition_impute
         else:
