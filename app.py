@@ -970,11 +970,17 @@ def get_result_segments(ids, complete_predictions, collections_predictions):
                     }
         result_list.append(temp_dict)
 
+    '''
     result_dict = {
         "Results": {
             "WebServiceOutput0": result_list
             }
         }
+    '''
+
+    result_dict =  {
+            "result": result_list
+            }
 
     return result_dict
 
