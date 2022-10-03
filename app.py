@@ -4,7 +4,6 @@ import json
 import urllib.request
 import os
 import ssl
-import pandas
 
 ATP_impute = 417.0
 Affluence_Index_impute = 188.0
@@ -1000,29 +999,6 @@ def setName():
         ids, complete_predictions, collections_predictions = make_api_calls(payload_list)
 
         return get_result_segments(ids, complete_predictions, collections_predictions)
-
-        '''
-        url = "http://20.252.11.207:80/api/v1/service/lead-segmentation-endpoint/score"
-
-        headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer NO1EPZHoxb9IqEACnfBsB1j3mvuee8h7'
-        }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        return response.json()['Results']['WebServiceOutput0'][0]
-        #return jsonify(str("Successfully stored  " + str(data)))
-        '''
-
-'''
-@app.route("/message", methods=["GET"])
-def message():
-    posted_data = request.get_json()
-    name = posted_data['name']
-    return jsonify(" Hope you are having a good time " + name + "!!!")
-'''
-
 
 #  main thread of execution to start the server
 if __name__ == '__main__':
