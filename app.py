@@ -994,7 +994,7 @@ def setName():
 
         print("Posted_data:", posted_data)
 
-        payload_list = posted_data['Inputs']['WebServiceInput1']
+        payload_list = posted_data['data']
 
         ids, complete_predictions, collections_predictions = make_api_calls(payload_list)
 
