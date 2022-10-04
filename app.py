@@ -72,7 +72,7 @@ collections_percentile_thresholds = [
 # Imputing Missing Values
 def impute_missing_values(posted_data):
     
-    id = posted_data['id']
+    id = posted_data['data']['id']
 
     # Float Fields
     try:
@@ -838,7 +838,7 @@ def make_api_calls(payload_list):
     compiled_payload_to_send = []
     ids = []
     for item in payload_list:
-        ids.append(item['id'])
+        ids.append(item['data']['id'])
         payload = impute_missing_values(item)
         payload = pre_process_fields(payload)
         payload = build_payload_to_send(payload)
