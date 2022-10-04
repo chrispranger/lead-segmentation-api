@@ -76,23 +76,23 @@ def impute_missing_values(posted_data):
 
     # Float Fields
     try:
-        ATP = posted_data['ATP']
+        ATP = posted_data['data']['ATP']
         ATP = float(ATP)
     except:
         ATP = ATP_impute
     try:
-        Affluence_Index = posted_data['Affluence_Index']
+        Affluence_Index = posted_data['data']['Affluence_Index']
         Affluence_Index = float(Affluence_Index)
     except:
         Affluence_Index = Affluence_Index_impute
     try:
-        MatchFlag_AffluenceIndex = posted_data['MatchFlag_AffluenceIndex']
+        MatchFlag_AffluenceIndex = posted_data['data']['MatchFlag_AffluenceIndex']
         MatchFlag_AffluenceIndex = float(MatchFlag_AffluenceIndex)
     except:
         MatchFlag_AffluenceIndex = MatchFlag_AffluenceIndex_impute
     try:
         # Get numeric from code
-        EconomicCohortsCodeNumeric = posted_data['EconomicCohorts']
+        EconomicCohortsCodeNumeric = posted_data['data']['EconomicCohorts']
         emp_str = ""
         for m in EconomicCohortsCodeNumeric:
             if m.isdigit():
@@ -102,54 +102,54 @@ def impute_missing_values(posted_data):
         EconomicCohortsCodeNumeric = EconomicCohortsCodeNumeric_impute
 
     try:
-        Total_Income360 = posted_data['Income360']
+        Total_Income360 = posted_data['data']['Income360']
         Total_Income360 = float(Total_Income360)
     except:
         Total_Income360 = Total_Income360_impute
     try:
-        MatchFlag_Income360 = posted_data['MatchFlag_Income360']
+        MatchFlag_Income360 = posted_data['data']['MatchFlag_Income360']
         MatchFlag_Income360 = float(MatchFlag_Income360)
     except:
         MatchFlag_Income360 = MatchFlag_Income360_impute
     try:
-        Vantage_Score_Neighborhood_Risk_Score = posted_data['Vantage Score Neighborhood Risk Score']
+        Vantage_Score_Neighborhood_Risk_Score = posted_data['data']['Vantage Score Neighborhood Risk Score']
         Vantage_Score_Neighborhood_Risk_Score = float(Vantage_Score_Neighborhood_Risk_Score)
     except:
         Vantage_Score_Neighborhood_Risk_Score = Vantage_Score_Neighborhood_Risk_Score_impute
     try:
-        total_liquid_assets = posted_data['Total_Liquid_Assets__c']
+        total_liquid_assets = posted_data['data']['Total_Liquid_Assets__c']
         total_liquid_assets = float(total_liquid_assets)
     except:
         total_liquid_assets = total_liquid_assets_impute
     try:
-        netWorthGoldMin__c = posted_data['netWorthGoldMin__c']
+        netWorthGoldMin__c = posted_data['data']['netWorthGoldMin__c']
         netWorthGoldMin__c = float(netWorthGoldMin__c)
     except:
         netWorthGoldMin__c = netWorthGoldMin__c_impute
     try:
-        ESI = posted_data['Economic_Stability_Indicator__c']
+        ESI = posted_data['data']['Economic_Stability_Indicator__c']
         ESI = float(ESI)
     except:
         ESI = ESI_impute
     try:
-        distance_to_center__c = posted_data['distance_to_center__c']
+        distance_to_center__c = posted_data['data']['distance_to_center__c']
         distance_to_center__c = float(distance_to_center__c)
     except:
         distance_to_center__c = distance_to_center__c_impute
     try:
-        created_hour = posted_data['Created_Hour__c']
+        created_hour = posted_data['data']['Created_Hour__c']
         created_hour = float(created_hour)
     except:
         created_hour = created_hour_impute
     try:
-        created_dow = posted_data['Created_Day_Of_Week__c']
+        created_dow = posted_data['data']['Created_Day_Of_Week__c']
         created_dow = float(created_dow)
     except:
         created_dow = created_dow_impute
 
     # String Data
     try:
-        EconomicCohortsCode = posted_data['EconomicCohorts']
+        EconomicCohortsCode = posted_data['data']['EconomicCohorts']
         if EconomicCohortsCode == None:
             EconomicCohortsCode = EconomicCohortsCode_impute
         else:
@@ -158,7 +158,7 @@ def impute_missing_values(posted_data):
         EconomicCohortsCode = EconomicCohortsCode_impute
 
     try:
-        first_campaign_type = posted_data['First_Campaign_Type__c']
+        first_campaign_type = posted_data['data']['First_Campaign_Type__c']
         if first_campaign_type == None:
             first_campaign_type = first_campaign_type_impute
         else:
@@ -167,7 +167,7 @@ def impute_missing_values(posted_data):
         first_campaign_type = first_campaign_type_impute
 
     try:
-        CreatedBy_Channel = posted_data['Created_By_Channel__c']
+        CreatedBy_Channel = posted_data['data']['Created_By_Channel__c']
         if CreatedBy_Channel == None:
             CreatedBy_Channel = CreatedBy_Channel_impute
         else:
@@ -176,7 +176,7 @@ def impute_missing_values(posted_data):
         CreatedBy_Channel = CreatedBy_Channel_impute
 
     try:
-        has_email_address = posted_data['Has_Email_Address__c']
+        has_email_address = posted_data['data']['Has_Email_Address__c']
         if has_email_address == None:
             has_email_address = has_email_address_impute
         else:
@@ -185,7 +185,7 @@ def impute_missing_values(posted_data):
         has_email_address = has_email_address_impute
 
     try:
-        dental_condition = posted_data['Dental_Condition__c']
+        dental_condition = posted_data['data']['Dental_Condition__c']
         if dental_condition == None:
             dental_condition = dental_condition_impute
         else:
