@@ -7,10 +7,8 @@ import ssl
 
 ATP_impute = 417.0
 Affluence_Index_impute = 188.0
-# MatchFlag_AffluenceIndex_impute = 1.0
 EconomicCohortsCodeNumeric_impute = 29.0
 Total_Income360_impute = 67589.0
-# MatchFlag_Income360_impute = 1.0
 Vantage_Score_Neighborhood_Risk_Score_impute = 692.0
 total_liquid_assets_impute = 30990.0
 netWorthGoldMin__c_impute = 100000.0
@@ -127,17 +125,10 @@ def impute_missing_values(posted_data):
     except:
         ATP = ATP_impute
     try:
-        Affluence_Index = posted_data['data']['Affluence_Index']
+        Affluence_Index = posted_data['data']['AffluenceIndex']
         Affluence_Index = float(Affluence_Index)
     except:
         Affluence_Index = Affluence_Index_impute
-    '''
-    try:
-        MatchFlag_AffluenceIndex = posted_data['data']['MatchFlag_AffluenceIndex']
-        MatchFlag_AffluenceIndex = float(MatchFlag_AffluenceIndex)
-    except:
-        MatchFlag_AffluenceIndex = MatchFlag_AffluenceIndex_impute
-    '''
     try:
         # Get numeric from code
         EconomicCohortsCodeNumeric = posted_data['data']['EconomicCohorts']
@@ -154,13 +145,6 @@ def impute_missing_values(posted_data):
         Total_Income360 = float(Total_Income360)
     except:
         Total_Income360 = Total_Income360_impute
-    '''
-    try:
-        MatchFlag_Income360 = posted_data['data']['MatchFlag_Income360']
-        MatchFlag_Income360 = float(MatchFlag_Income360)
-    except:
-        MatchFlag_Income360 = MatchFlag_Income360_impute
-    '''
     try:
         Vantage_Score_Neighborhood_Risk_Score = posted_data['data']['Vantage Score Neighborhood Risk Score']
         Vantage_Score_Neighborhood_Risk_Score = float(Vantage_Score_Neighborhood_Risk_Score)
@@ -246,12 +230,10 @@ def impute_missing_values(posted_data):
     payload = {
                 "id": id,
                 "ATP": ATP,
-                "Affluence_Index": Affluence_Index,
-                # "MatchFlag_AffluenceIndex": MatchFlag_AffluenceIndex,
+                "AffluenceIndex": Affluence_Index,
                 "EconomicCohortsCodeNumeric": EconomicCohortsCodeNumeric,
                 "EconomicCohortsCode": EconomicCohortsCode,
-                "Total_Income360": Total_Income360,
-                # "MatchFlag_Income360": MatchFlag_Income360,
+                "Income360": Total_Income360,
                 "Vantage Score Neighborhood Risk Score": Vantage_Score_Neighborhood_Risk_Score,
                 "total_liquid_assets": total_liquid_assets,
                 "netWorthGoldMin__c": netWorthGoldMin__c,
@@ -763,11 +745,9 @@ def build_payload_to_send(payload):
 
     new_payload = {
                 "ATP": payload['ATP'],
-                "Affluence_Index": payload['Affluence_Index'],
-                # "MatchFlag_AffluenceIndex": payload['MatchFlag_AffluenceIndex'],
+                "Affluence_Index": payload['AffluenceIndex'],
                 "EconomicCohortsCodeNumeric": payload['EconomicCohortsCodeNumeric'],
-                "Total_Income360": payload['Total_Income360'],
-                # "MatchFlag_Income360": payload['MatchFlag_Income360'],
+                "Total_Income360": payload['Income360'],
                 "Vantage Score Neighborhood Risk Score": payload['Vantage Score Neighborhood Risk Score'],
                 "total_liquid_assets": payload['total_liquid_assets'],
                 "netWorthGoldMin__c": payload['netWorthGoldMin__c'],
