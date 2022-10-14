@@ -7,10 +7,10 @@ import ssl
 
 ATP_impute = 417.0
 Affluence_Index_impute = 188.0
-MatchFlag_AffluenceIndex_impute = 1.0
+# MatchFlag_AffluenceIndex_impute = 1.0
 EconomicCohortsCodeNumeric_impute = 29.0
 Total_Income360_impute = 67589.0
-MatchFlag_Income360_impute = 1.0
+# MatchFlag_Income360_impute = 1.0
 Vantage_Score_Neighborhood_Risk_Score_impute = 692.0
 total_liquid_assets_impute = 30990.0
 netWorthGoldMin__c_impute = 100000.0
@@ -25,6 +25,51 @@ CreatedBy_Channel_impute = 'Website'
 has_email_address_impute = 'N'
 dental_condition_impute = 'No Response or Other'
 
+completed_percentile_thresholds = [
+    0.5618455689698492,
+    0.45255955707037726,
+    0.3791328809375031,
+    0.3247136538868236,
+    0.2801799989765551,
+    0.2459017891993004,
+    0.21512971380788146,
+    0.19336098729658877,
+    0.17387252726703237,
+    0.1570808028296809,
+    0.14138929439895515,
+    0.12806552689227524,
+    0.11534446520824325,
+    0.10264464822503738,
+    0.08995962328456503,
+    0.07632904550224781,
+    0.06164845917462097,
+    0.04801035035200325,
+    0.03340477708547122
+    ]
+
+collections_percentile_thresholds = [
+    4691.003565296626,
+    3013.658181150213,
+    2229.8728434273876,
+    1734.365564581659,
+    1370.3905514934868,
+    1115.0334416902908,
+    929.5500486300754,
+    768.8388440932843,
+    641.3777338719883,
+    531.7923993276363,
+    442.6984110249428,
+    365.0432264351628,
+    297.5606573988183,
+    236.9258610252626,
+    178.94690428273873,
+    122.65745374142925,
+    64.34480976599149,
+    3.0353671917654172,
+    -77.5399394722977
+ ]
+
+'''### Old (With MatchFlags)
 completed_percentile_thresholds = [
     0.5618980927990199,
     0.4527505348275388,
@@ -68,6 +113,7 @@ collections_percentile_thresholds = [
     18.365324039178862,
     -54.64081999794801
     ]
+'''
 
 # Imputing Missing Values
 def impute_missing_values(posted_data):
@@ -85,11 +131,13 @@ def impute_missing_values(posted_data):
         Affluence_Index = float(Affluence_Index)
     except:
         Affluence_Index = Affluence_Index_impute
+    '''
     try:
         MatchFlag_AffluenceIndex = posted_data['data']['MatchFlag_AffluenceIndex']
         MatchFlag_AffluenceIndex = float(MatchFlag_AffluenceIndex)
     except:
         MatchFlag_AffluenceIndex = MatchFlag_AffluenceIndex_impute
+    '''
     try:
         # Get numeric from code
         EconomicCohortsCodeNumeric = posted_data['data']['EconomicCohorts']
@@ -106,11 +154,13 @@ def impute_missing_values(posted_data):
         Total_Income360 = float(Total_Income360)
     except:
         Total_Income360 = Total_Income360_impute
+    '''
     try:
         MatchFlag_Income360 = posted_data['data']['MatchFlag_Income360']
         MatchFlag_Income360 = float(MatchFlag_Income360)
     except:
         MatchFlag_Income360 = MatchFlag_Income360_impute
+    '''
     try:
         Vantage_Score_Neighborhood_Risk_Score = posted_data['data']['Vantage Score Neighborhood Risk Score']
         Vantage_Score_Neighborhood_Risk_Score = float(Vantage_Score_Neighborhood_Risk_Score)
@@ -197,11 +247,11 @@ def impute_missing_values(posted_data):
                 "id": id,
                 "ATP": ATP,
                 "Affluence_Index": Affluence_Index,
-                "MatchFlag_AffluenceIndex": MatchFlag_AffluenceIndex,
+                # "MatchFlag_AffluenceIndex": MatchFlag_AffluenceIndex,
                 "EconomicCohortsCodeNumeric": EconomicCohortsCodeNumeric,
                 "EconomicCohortsCode": EconomicCohortsCode,
                 "Total_Income360": Total_Income360,
-                "MatchFlag_Income360": MatchFlag_Income360,
+                # "MatchFlag_Income360": MatchFlag_Income360,
                 "Vantage Score Neighborhood Risk Score": Vantage_Score_Neighborhood_Risk_Score,
                 "total_liquid_assets": total_liquid_assets,
                 "netWorthGoldMin__c": netWorthGoldMin__c,
@@ -714,10 +764,10 @@ def build_payload_to_send(payload):
     new_payload = {
                 "ATP": payload['ATP'],
                 "Affluence_Index": payload['Affluence_Index'],
-                "MatchFlag_AffluenceIndex": payload['MatchFlag_AffluenceIndex'],
+                # "MatchFlag_AffluenceIndex": payload['MatchFlag_AffluenceIndex'],
                 "EconomicCohortsCodeNumeric": payload['EconomicCohortsCodeNumeric'],
                 "Total_Income360": payload['Total_Income360'],
-                "MatchFlag_Income360": payload['MatchFlag_Income360'],
+                # "MatchFlag_Income360": payload['MatchFlag_Income360'],
                 "Vantage Score Neighborhood Risk Score": payload['Vantage Score Neighborhood Risk Score'],
                 "total_liquid_assets": payload['total_liquid_assets'],
                 "netWorthGoldMin__c": payload['netWorthGoldMin__c'],
@@ -757,8 +807,14 @@ def call_collections_endpoint(data):
 
     body = str.encode(json.dumps(data_to_send))
 
+    ''' Old (With MatchFlag)
     url = 'http://20.252.11.207:80/api/v1/service/collections-regression-endpoint/score'
     api_key = 'pYpX6hli19QEEZZ7sYTMLQzBCTEzcNvQ' # Replace this with the API key for the web service
+    '''
+
+    url = 'http://20.252.11.207:80/api/v1/service/collections-endpt-no-matchflags/score'
+    api_key = 'e85XU18r3ckuRqwpbyEjPcK32rF8b6r3' # Replace this with the API key for the web service
+
 
     # The azureml-model-deployment header will force the request to go to a specific deployment.
     # Remove this header to have the request observe the endpoint traffic rules
@@ -805,8 +861,13 @@ def call_complete_endpoint(data):
 
     body = str.encode(json.dumps(data_to_send))
 
+    ''' Old (With MatchFlag)
     url = 'http://20.252.11.207:80/api/v1/service/complete-classification-endpoint/score'
     api_key = '73eCMwM3jsZDthVABC2EUc4KOnWPT0e3' # Replace this with the API key for the web service
+    '''
+
+    url = 'http://20.252.11.207:80/api/v1/service/complete-endpoint-no-matchflags/score'
+    api_key = 'qj7DSpgvmKwxJaSzwud2whcSmNFBpbrr' # Replace this with the API key for the web service
 
     # The azureml-model-deployment header will force the request to go to a specific deployment.
     # Remove this header to have the request observe the endpoint traffic rules
