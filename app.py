@@ -885,6 +885,8 @@ def make_api_calls(payload_list):
         payload = build_payload_to_send(payload)
         compiled_payload_to_send.append(payload)
 
+        print("Data Sent:", payload)
+
     # Send request in batches if needed
     if len(compiled_payload_to_send) > 5000:
         data_dict_smaller_lists = list(split(compiled_payload_to_send, int(len(compiled_payload_to_send)/5000)))
