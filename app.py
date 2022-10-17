@@ -885,7 +885,7 @@ def make_api_calls(payload_list):
         payload = build_payload_to_send(payload)
         compiled_payload_to_send.append(payload)
 
-        print("Data Sent:", payload)
+        # print("Data Sent:", payload)
 
     # Send request in batches if needed
     if len(compiled_payload_to_send) > 5000:
@@ -908,7 +908,7 @@ def make_api_calls(payload_list):
             collections_prediction = collections_result['Results']['WebServiceOutput0'][x]['Scored Labels']
             collections_predictions.append(collections_prediction)
 
-    return ids, complete_predictions, collections_predictions
+    return ids, complete_predictions, collections_predictions, compiled_payload_to_send
 
 
 def get_result_segments(ids, complete_predictions, collections_predictions):
@@ -1013,6 +1013,18 @@ def get_result_segments(ids, complete_predictions, collections_predictions):
                     }
         result_list.append(temp_dict)
 
+    log_list = []
+    for x in range(len(result_segments)):
+        temp_dict = {
+                        "id": ids[x],
+                        "segment_result": result_segments[x],
+                        "complete_model_pred": complete_predictions[x],
+                        "complete_model_segment": completed_segments[x],
+                        "collections_model_pred": collections_predictions[x],
+                        "collections_model_segment": collections_segments[x],
+                    }
+        log_list.append(temp_dict)
+
     '''
     result_dict = {
         "Results": {
@@ -1025,7 +1037,7 @@ def get_result_segments(ids, complete_predictions, collections_predictions):
             "result": result_list
             }
 
-    return result_dict
+    return result_dict, log_list
 
 
 def split(a, n):
@@ -1046,13 +1058,22 @@ def setName():
     if request.method == 'POST':
         posted_data = request.get_json()
 
-        print("Posted_data:", posted_data)
-
         payload_list = posted_data['data']
 
-        ids, complete_predictions, collections_predictions = make_api_calls(payload_list)
+        ids, complete_predictions, collections_predictions, compiled_payload_to_send = make_api_calls(payload_list)
 
-        return get_result_segments(ids, complete_predictions, collections_predictions)
+        value_to_send_back, log_results = get_result_segments(ids, complete_predictions, collections_predictions)
+
+        log_dict = {
+
+            "data_recieved":posted_data,
+            "data_sent_internally": compiled_payload_to_send,
+            "data_returned":log_results
+        }
+        
+        print(log_dict)
+
+        return value_to_send_back
 
 #  main thread of execution to start the server
 if __name__ == '__main__':
